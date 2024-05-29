@@ -21,10 +21,11 @@ st.markdown("YES. YOU CAN CREATE YOUR OWN DATASAURUS!!! HOW CRAZY IS THAT???!!! 
 ## Input
 c1, c2 = st.columns([4, 6])
 c1.header("Input")
-c1.markdown("Select the number of random points between 0 and 100 with the slider below")
-num_points = c1.slider("Number of points", min_value=100, max_value=250, value=150, step=1)
-points = np.random.uniform(low=[0,0], high=[100,100], size=(num_points,2))
-df = pd.DataFrame(data=points, columns=["x", "y"])
+#c1.markdown("Select the number of random points between 0 and 100 with the slider below")
+#num_points = c1.slider("Number of points", min_value=100, max_value=250, value=150, step=1)
+#points = np.random.uniform(low=[0,0], high=[100,100], size=(num_points,2))
+filename = f"data/shape_start/Datasaurus_data.csv"
+df = pd.read_csv(filename)
 c2.altair_chart(visualization.scatterplot_from_df(df))
 
 # The content
@@ -73,7 +74,7 @@ else:
         num_frames = 2000
         for frame in range(num_frames):
             df = generation.run_pattern(df, shape_start, shape_end, 
-                    lines_from_canvas=lines_from_canvas, iters=100, num_frames=1, decimals=2)
+                    lines_from_canvas=lines_from_canvas, iters=100, num_frames=1, decimals=2, shake=0.4)
             progress = frame / num_frames
             visualization.animate_from_df(df, progress_bar_placeholder, altair_placeholder, progress, num_frames)
         csv = convert_df(df)
