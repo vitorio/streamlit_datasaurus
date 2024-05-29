@@ -18,7 +18,7 @@ st.markdown("YES. YOU CAN CREATE YOUR OWN DATASAURUS!!! HOW CRAZY IS THAT???!!! 
 c1, c2 = st.columns([4, 6])
 c1.header("Input")
 c1.markdown("Select the number of random points between 0 and 100 with the slider below")
-num_points = c1.slider("Number of points", min_value=100, max_value=250, value=150, step=10)
+num_points = c1.slider("Number of points", min_value=100, max_value=250, value=150, step=1)
 points = np.random.uniform(low=[0,0], high=[100,100], size=(num_points,2))
 df = pd.DataFrame(data=points, columns=["x", "y"])
 c2.altair_chart(visualization.scatterplot_from_df(df))
@@ -66,7 +66,7 @@ else:
         # Placeholders to be filled in later
         progress_bar_placeholder = st.empty()
         altair_placeholder = st.empty()
-        num_frames = 1000
+        num_frames = 2000
         for frame in range(num_frames):
             df = generation.run_pattern(df, shape_start, shape_end, 
                     lines_from_canvas=lines_from_canvas, iters=100, num_frames=1, decimals=2)
