@@ -10,6 +10,10 @@ from py_code import keywords
 def clear_lines():
     st.session_state["lines"] = []
 
+@st.experimental_memo
+def convert_df(df):
+   return df.to_csv(index=False).encode('utf-8')
+
 # Set title
 st.title("Can I have my own Datasaurus?")
 st.markdown("YES. YOU CAN CREATE YOUR OWN DATASAURUS!!! HOW CRAZY IS THAT???!!! \n\n Define the number of random points and the figure, and explore how the points converge!")
@@ -72,3 +76,12 @@ else:
                     lines_from_canvas=lines_from_canvas, iters=100, num_frames=1, decimals=2)
             progress = frame / num_frames
             visualization.animate_from_df(df, progress_bar_placeholder, altair_placeholder, progress, num_frames)
+        csv = convert_df(df)
+
+        st.download_button(
+           "Press to Download",
+           csv,
+           "file.csv",
+           "text/csv",
+           key='download-csv'
+        )
