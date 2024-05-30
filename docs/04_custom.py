@@ -74,7 +74,7 @@ else:
         num_frames = 2000
         for frame in range(num_frames):
             df = generation.run_pattern(df, shape_start, shape_end, 
-                    lines_from_canvas=lines_from_canvas, iters=100, num_frames=1, decimals=2, shake=0.4)
+                    lines_from_canvas=lines_from_canvas, iters=100, num_frames=1, decimals=2, shake=0.4, max_temp=0.6)
             progress = frame / num_frames
             visualization.animate_from_df(df, progress_bar_placeholder, altair_placeholder, progress, num_frames)
         csv = convert_df(df)
